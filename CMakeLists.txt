@@ -3,6 +3,12 @@
 
 cmake_minimum_required(VERSION 3.2)
 
+include(cmake/HunterGate.cmake)
+HunterGate(
+    URL "https://github.com/dan-42/hunter/archive/v0.23.222-dan-42.tar.gz"
+    SHA1 "da46b9f8fa38b23a339fd36280f93be9de57b460"
+)
+
 #---------------------------------------------------------------------------------------
 # Start spdlog project
 #---------------------------------------------------------------------------------------
@@ -124,6 +130,7 @@ target_link_libraries(spdlog_header_only INTERFACE Threads::Threads)
 # Use fmt package if using exertnal fmt
 #---------------------------------------------------------------------------------------
 if(SPDLOG_FMT_EXTERNAL)
+	hunter_add_package(fmt)
     if (NOT TARGET fmt::fmt)
         find_package(fmt REQUIRED)
     endif ()
