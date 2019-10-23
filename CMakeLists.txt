@@ -125,6 +125,13 @@ target_include_directories(spdlog_header_only INTERFACE
         "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 target_link_libraries(spdlog_header_only INTERFACE Threads::Threads)
 
+#---------------------------------------------------------------------------------------
+# Use liblog for Android
+#---------------------------------------------------------------------------------------
+if(ANDROID)
+	target_link_libraries(spdlog PUBLIC log)
+	target_link_libraries(spdlog_header_only INTERFACE log)
+endif()
 
 #---------------------------------------------------------------------------------------
 # Use fmt package if using exertnal fmt
